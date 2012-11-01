@@ -1,237 +1,8 @@
 <?php
-class Scope implements ArrayAccess {
-    private $parent;
-    
+class Scope {
     private $providers = array();
     
-    private $values = array();
-
-    public function __call($key, $values) {
-        $method = $this->get($key);
-        
-        if ($method === null) {
-            echo '<pre>';
-            $e = new Exception();
-            print_r($e->getTraceAsString());
-            echo '</pre>';
-        }
-        
-        return call_user_func_array($method, $values);
-    }
-    
-    public function __get($key) {
-        return $this->get($key);
-    }
-    
-    public function __set($key, $value) {
-        return $this[$key] = $value;
-    }
-
-    public function offsetExists($key) {
-        if (isset($this->values[$key])) {
-            return true;
-        }
-        
-        if (isset($this->providers[$key])) {
-            return true;
-        }
-        
-        if ($this->parent !== null) {
-            return $this->parent->offsetExists($key);
-        }
-        
-        return null;
-    }
-
-    public function offsetGet($key) {
-        return $this->get($key);
-    }
-
-    public function offsetSet($key, $value) {
-        return $this->provider($key, $value);
-    }
-
-    public function offsetUnset($key) {
-        unset($this->providers[$key]);
-        
-        unset($this->values[$key]);
-    }
-    
-    public function get($key, $scope=null) {
-        if ($scope === null) {
-            $scope = $this;
-        }
-        
-        if (isset($this->values[$key])) {
-            return $this->values[$key]($scope);
-        }
-        
-        if (isset($this->providers[$key])) {
-            $this->values[$key] = $this->providers[$key]();
-
-            return $this->values[$key]($scope);
-        }
-        
-        if ($this->parent !== null) {
-            return $this->parent->get($key, $scope);
-        }
-        
-        return null;
-    }
-    
-    public function __construct($parent=null, $fields=array()) {
-        $this->parent = $parent;
-        
-        $scope = $this;
-        
-        foreach ($fields as $key=>$value) {
-            $this->provider($key, $this->field($value));
-        }
-        
-        $this['scope'] = $this->field($this);
-        
-        $this['inject'] = $this->field(function ($method, $args=array(), $injects=array()) use ($scope) {
-            $invoke = $scope->method($method, $injects);
-
-            $invoke = $invoke();
-
-            $invoke = $invoke($scope);
-
-            if (is_array($method) && !is_object($method[0])) {
-                return $invoke($method[0], $args);
-            }
-
-            return $invoke($args);
-        });
-        
-        $this['instance'] = $this->field(function ($class, $args=array(), $injects=array()) use ($scope) {
-            $provider = $scope->factory($class, $injects);
-            
-            $invoke = $provider();
-            
-            $invoke = $invoke($scope);
-            
-            return $invoke($args);
-        });
-    }
-    
-    public function provider($key, $provider) {
-        $this->providers[$key] = function () use ($provider) {
-            return $provider();
-        };
-    }
-    
-    public function field($value) {
-        return function () use ($value) {
-            return function () use ($value) {
-                return $value;
-            };
-        };
-    }
-    
-    public function method($method, $injects=array()) {
-        $scope = $this;
-        
-        return function () use ($method, $scope, $injects) {
-            $invoke = $scope->reflectMethod($method);
-            
-            $keys = $scope->keys($invoke->getParameters(), $injects);
-
-            if ($invoke instanceof ReflectionFunction) {
-                return function ($scope) use ($invoke, $keys) {
-                    return function ($args=array()) use ($scope, $invoke, $keys) {
-                        $values = $scope->values($keys, $args);
-                        
-                        return $invoke->invokeArgs($values);
-                    };
-                };
-            }
-            
-            if (is_object($method[0])) {
-                $object = $method[0];
-                
-                return function ($scope) use ($invoke, $keys, $object) {
-                    return function ($args=array()) use ($scope, $invoke, $keys, $object) {
-                        $values = $scope->values($keys, $args);
-
-                        return $invoke->invokeArgs($object, $values);
-                    };
-                };
-            }
-                
-            return function ($scope) use ($invoke, $keys) {
-                return function ($object, $args=array()) use ($scope, $invoke, $keys) {
-                    $values = $scope->values($keys, $args);
-
-                    return $invoke->invokeArgs($object, $values);
-                };
-            };
-        };
-    }
-    
-    public function factory($class, $injects=array()) {
-        $scope = $this;
-        
-        return function () use ($class, $scope, $injects) {
-            $invoke = new ReflectionClass($class);
-            
-            $params = $invoke->getConstructor() !== null ? $invoke->getConstructor()->getParameters() : array();
-            
-            $keys = $scope->keys($params, $injects);
-
-            return function ($scope) use ($invoke, $keys) {
-                return function ($args=array()) use ($scope, $invoke, $keys) {
-                    $values = $scope->values($keys, $args);
-                    
-                    return $invoke->newInstanceArgs($values);
-                };
-            };
-        };
-    }
-    
-    public function service($service, $injects=array()) {
-        $scope = $this;
-        
-        return function () use ($service, $scope, $injects) {
-            if (is_string($service)) {
-                $invoke = new ReflectionClass($service);
-
-                $params = $invoke->getConstructor() !== null ? $invoke->getConstructor()->getParameters() : array();
-
-                $keys = $scope->keys($params, $injects);
-
-                $values = $scope->values($keys);
-
-                $instance = $invoke->newInstanceArgs($values);
-
-                return function () use ($instance) {
-                    return $instance;
-                };
-            }
-            
-            if (is_callable($service)) {
-                return function () use ($scope, $service) {
-                    static $value;
-                    
-                    if ($value === null) {
-                        $value = $scope->inject($service);
-                    }
-                    
-                    return $value;
-                };
-            }
-        };
-    }
-    
-    public function reflectMethod($method) {
-        if (is_array($method)) {
-            return new ReflectionMethod($method[0], $method[1]);
-        }
-        
-        return new ReflectionFunction($method);
-    }
-    
-    public function keys($params, $injects) {
+    public function keys($params, $injects=array()) {
         $keys = array();
         
         foreach ($params as $index=>$param) {
@@ -245,21 +16,177 @@ class Scope implements ArrayAccess {
         return $keys;
     }
     
-    public function values($keys, $args=array()) {
+    public function fetch($key) {
+        if (!isset($this->providers[$key])) {
+            return null;
+        }
+        
+        return $this->providers[$key]($this);
+    }
+    
+    public function values($keys, $params=array(), $locals=array()) {
         $values = array();
-
+        
         foreach ($keys as $index=>$key) {
-            if (isset($args[$key])) {
-                $values[] = $args[$key];
+            if (isset($locals[$key])) {
+                $values[] = $locals[$key];
             }
-            else if (isset($args[$index])) {
-                $values[] = $args[$index];
+            else if (isset($locals[$index])) {
+                $values[] = $locals[$index];
+            }
+            else if (isset($params[$key])) {
+                $values[] = $params[$key];
+            }
+            else if (isset($params[$index])) {
+                $values[] = $params[$index];
             }
             else {
-                $values[] = $this->get($key);
+                $values[] = $this->fetch($key);
             }
         }
         
         return $values;
+    }
+    
+    public function inject(
+            callable $value, 
+            array $params=array()) {
+        
+        $scope = $this;
+        
+        return function ($scope) use ($value, $params) {
+            if (is_array($value) && is_string($value[0])) {
+                $method = new \ReflectionMethod($value[0], $value[1]);
+                
+                $keys = $scope->keys($method->getParameters());
+                
+                $callback = function ($object, $locals) use ($scope, $method, $keys, $params) {
+                    $args = $scope->values($keys, $params, $locals);
+                    
+                    return $method->invokeArgs($object, $args);
+                };
+            }
+            else if (is_array($value)) {
+                $method = new \ReflectionMethod($value[0], $value[1]);
+                
+                $keys = $scope->keys($method->getParameters());
+                
+                $callback = function ($locals) use ($scope, $method, $keys, $params) {
+                    $args = $scope->values($keys, $params, $locals);
+                    
+                    return $method->invokeArgs($value[0], $args);
+                };
+            }
+            else {
+                $method = new \ReflectionFunction($value);
+                
+                $keys = $scope->keys($method->getParameters());
+                
+                $callback = function ($locals) use ($scope, $method, $keys, $params) {
+                    $args = $scope->values($keys, $params, $locals);
+                    
+                    return $method->invokeArgs($args);
+                };
+            }
+            
+            return function ($locals=array()) use ($callback) {
+                return $callback($locals);
+            };
+        };
+    }
+
+    public function instance(
+            $value, 
+            array $params=array()) {
+        
+        $scope = $this;
+        
+        return function ($scope) use ($value, $params) {
+            $method = new \ReflectionClass($value);
+
+            $keys = $scope->keys(
+                $method->getConstructor() !== null ? 
+                $method->getConstructor()->getParameters() : 
+                array()
+            );
+
+            $callback = function ($locals) use ($scope, $method, $keys, $params) {
+                $args = $scope->values($keys, $params, $locals);
+
+                return $method->newInstanceArgs($args);
+            };
+            
+            return function ($locals=array()) use ($callback) {
+                return $callback($locals);
+            };
+        };
+    }
+    
+    public function provider($key, $value) {
+        $this->providers[$key] = function ($scope) use ($value) {
+            static $provider = null;
+            
+            if ($provider === null) {
+                $provider = $value($scope);
+            }
+            
+            return $provider($scope);
+        };
+    }
+    
+    public function constant($key, $value) {
+        $this->provider($key, function ($scope) use ($value) {
+            return function ($scope) use ($value) {
+                return $value;
+            };
+        });
+    }
+    
+    public function variable($key, $value, $args=array()) {
+        $this->provider($key, function ($scope) use ($value, $args) {
+            return function ($scope) use ($value, $args) {
+                $inject = $scope->inject($value, $args);
+                
+                $callback = $inject($scope);
+                
+                return $callback();
+            };
+        });
+    }
+    
+    public function method($key, $value, $args=array()) {
+        $this->provider($key, function ($scope) use ($value, $args) {
+            return function ($scope) use ($value, $args) {
+                $inject = $scope->inject($value, $args);
+                
+                $callback = $inject($scope);
+                
+                return $callback;
+            };
+        });
+    }
+    
+    public function factory($key, $value, $args=array()) {
+        $this->provider($key, function ($scope) use ($value, $args) {
+            return function ($scope) use ($value, $args) {
+                $instance = $scope->instance($value, $args);
+                
+                $callback = $instance($scope);
+                
+                return $callback;
+            };
+        });
+    }
+    
+    public function service($key, $value, $args=array()) {
+        $this->provider($key, function ($scope) use ($value, $args) {
+            $callback = $scope->inject($value, $args);
+            
+            $service = $callback($scope);
+            
+            return function ($scope) use ($service) {
+                return $service;
+            };
+        });
     }
 }
