@@ -1,5 +1,24 @@
 <?php
 /**
+ * Copyright (c) 2012 Terrence Howard <chemius@gmail.com>
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy 
+ * of this software and associated documentation files (the "Software"), to deal 
+ * in the Software without restriction, including without limitation the rights 
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+ * copies of the Software, and to permit persons to whom the Software is 
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in 
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+ * SOFTWARE.
  *
  * @author      Terrence Howard <chemisus@gmail.com>
  * @package     Slinpins
@@ -15,6 +34,11 @@
  */
 class Scope {
     /**
+     * @var     string  Regular expression used to parse injection annotations.
+     */
+    const ANNOTATION_PATTERN = '/^\s*\*\s*(\@inject)\s+(\S+)(?:\s+((?:\d+(?!\S))|(?:\$\S+)))?/';
+    
+    /**
      *
      * @var array
      */
@@ -27,32 +51,34 @@ class Scope {
      * @param   string[]    $array1
      * @param   string[]    $array2
      * @param   string[]    ...
-     * 
+     *
      * @return  string[]    The keys that will be used to be injected into a
      * method.
      */
     public function keys(array $array1, array $array2=array()) {
         $arrays = \func_get_args();
-        
-        $keys = \array_shift($arrays);
-        
-        foreach ($arrays as $array) {
-            foreach ($array as $index=>$key) {
-                if (isset($array[$index])) {
-                    $keys[$index] = $array[$index];
-                }
 
-                if (isset($array[$key])) {
-                    $keys[$index] = $array[$key];
+        $values = \array_values(array_shift($arrays));
+        
+        $keys = \array_flip($values);
+
+        foreach ($arrays as $array) {
+            foreach ($array as $key=>$value) {
+                if (\is_integer($key) && $key < count($values)) {
+                    $values[$key] = $value;
+                }
+                else if (isset($keys[$key])) {
+                    $values[$keys[$key]] = $value;
                 }
             }
         }
 
-        return $keys;
+        return $values;
     }
 
     /**
-     * 
+     * Returns the reflection object for a function.
+     *
      * @param   callable    $function
      * @return  \ReflectionFunction
      */
@@ -61,7 +87,8 @@ class Scope {
     }
 
     /**
-     * 
+     * Returns the reflection object for a method.
+     *
      * @param   object|string       $class
      * @param   string              $method
      * @return  \ReflectionMethod
@@ -71,7 +98,8 @@ class Scope {
     }
 
     /**
-     * 
+     * Returns the reflection object for a constructor.
+     *
      * @param   object|string   $value
      * @return  string[]
      */
@@ -82,7 +110,8 @@ class Scope {
     }
 
     /**
-     * 
+     * Returns the names of each parameter in the array provided.
+     *
      * @param   \ReflectionMethod[]     $parameters
      * @return  string[]
      */
@@ -97,12 +126,13 @@ class Scope {
     }
 
     /**
-     * 
+     * Parses out the injection info in an annotation docblock.
+     *
      * @param   string      $annotation
      * @return  string[]
      */
     public function annotations($annotation) {
-        $pattern = '/^\s*\*\s*(\@inject)\s+(\S+)(?:\s+((?:\d+(?!\S))|(?:\$\S+)))?/';
+        $pattern = self::ANNOTATION_PATTERN;
 
         $values = \preg_grep($pattern, explode("\n", $annotation || ''));
 
@@ -125,6 +155,7 @@ class Scope {
     }
 
     /**
+     * Returns the value of a provider.
      *
      * @param   string  $key
      * @return  mixed
@@ -138,29 +169,47 @@ class Scope {
     }
 
     /**
+     * Returns an array containing the values from the providers specified by
+     * the keys array.
      *
      * @param   string[]    $keys
-     * @param   mixed[]     $params
-     * @param   mixed[]     $locals
+     * @param   mixed[]     $values1
+     * @param   mixed[]     $values2
+     * @param   mixed[]     ...
      * @return  mixed[]
      */
-    public function values($keys, $params=array(), $locals=array()) {
+    public function values($keys, $values1=array(), $values2=array()) {
         $values = array();
 
+        $arrays = \func_get_args();
+
+        array_shift($arrays);
+
+        $arrays = \array_reverse($arrays);
+
         foreach ($keys as $index=>$key) {
-            if (isset($locals[$key])) {
-                $values[] = $locals[$key];
+            $found = false;
+
+            foreach ($arrays as $array) {
+                if (isset($array[$key])) {
+                    $values[] = $array[$key];
+
+                    $found = true;
+
+                    break;
+                }
+
+                if (isset($array[$index])) {
+                    $values[] = $array[$index];
+
+                    $found = true;
+
+                    break;
+                }
+
             }
-            else if (isset($locals[$index])) {
-                $values[] = $locals[$index];
-            }
-            else if (isset($params[$key])) {
-                $values[] = $params[$key];
-            }
-            else if (isset($params[$index])) {
-                $values[] = $params[$index];
-            }
-            else {
+
+            if (!$found) {
                 $values[] = $this->fetch($key);
             }
         }
@@ -169,7 +218,9 @@ class Scope {
     }
 
     /**
-     * 
+     * Returns a Closure object that when called injects the parameters into
+     * the method provided.
+     *
      * @param   callable    $value
      * @param   mixed[]     $params
      * @param   string[]    $injections
@@ -229,7 +280,9 @@ class Scope {
     }
 
     /**
-     * 
+     * Returns a Closure object that when called injects the parameters into
+     * the constructor of the class provided.
+     *
      * @param   string      $value
      * @param   mixed[]     $params
      * @param   string[]    $injections
@@ -278,6 +331,7 @@ class Scope {
     }
 
     /**
+     * Stores a provider.
      *
      * @param   string      $key
      * @param   \Closure    $value
@@ -295,6 +349,7 @@ class Scope {
     }
 
     /**
+     * Creates a provider for a constant value.
      *
      * @param   string  $key
      * @param   mixed   $value
@@ -308,7 +363,8 @@ class Scope {
     }
 
     /**
-     * 
+     * Creates a provider for a variable value.
+     *
      * @param   string    $key
      * @param   callable  $value
      * @param   mixed[]   $args
@@ -327,6 +383,7 @@ class Scope {
     }
 
     /**
+     * Creates a provider for a method.
      *
      * @param   string    $key
      * @param   callable  $value
@@ -346,6 +403,7 @@ class Scope {
     }
 
     /**
+     * Creates a provider for a factory.
      *
      * @param   string    $key
      * @param   string    $value
@@ -365,6 +423,7 @@ class Scope {
     }
 
     /**
+     * Creates a provider for a service.
      *
      * @param   string    $key
      * @param   callable  $value

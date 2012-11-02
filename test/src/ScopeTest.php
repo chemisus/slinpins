@@ -37,9 +37,15 @@ class MockTest {
 class ScopeTest extends PHPUnit_Framework_TestCase {
     public static function keysProvider() {
         return array(
-            array(function ($a, $b) {}, array(), array(), array('a', 'b')),
+            array(function ($a, $b, $c) {}, array(), array(), array('a', 'b', 'c')),
+            array(function ($a, $b, $c) {}, array('d', 'e'), array(), array('d', 'e', 'c')),
+            array(function ($a, $b, $c) {}, array('d', 'e'), array('f'), array('f', 'e', 'c')),
+            array(function ($a, $b, $c) {}, array(1=>'e', 0=>'d'), array('f'), array('f', 'e', 'c')),
+            array(function ($a, $b, $c) {}, array(1=>'e', 0=>'d'), array('a'=>'f'), array('f', 'e', 'c')),
+            array(function ($a, $b, $c) {}, array('b'=>'e', 'a'=>'d'), array('a'=>'f'), array('f', 'e', 'c')),
         );
     }
+
     public static function injectProvider() {
         return array(
             array('sprintf', array(0=>'a%s', 1=>'b', 'format'=>'c%s', 'arg1'=>'d', 'e%s', 'f'), array(0=>'g%s', 1=>'h', 'format'=>'i%s', 'arg1'=>'j', 'k%s', 'l'), 'ij'),
@@ -62,6 +68,7 @@ class ScopeTest extends PHPUnit_Framework_TestCase {
             array('sprintf', array(), array('k%s', 'l'), 'kl'),
         );
     }
+    
     public static function instanceProvider() {
         return array(
             array('MockTest', array('a', 'b'), array(), array('a'=>'a', 'b'=>'b')),
@@ -72,27 +79,30 @@ class ScopeTest extends PHPUnit_Framework_TestCase {
             array('MockTest', array('a', 'b'), array(1=>'d'), array('a'=>'a', 'b'=>'d')),
         );
     }
+    
     public static function methodProvider() {
         return array(
             array('a', function () {return 'a';}, array(), array(), 'a')
         );
     }
+    
     public static function variableProvider() {
         return array(
             array('a', function () {return 'a';}, array(), 'a')
         );
     }
+    
     public static function serviceProvider() {
         return array(
             array('a', function () {return 'a';}, array(), 'a')
         );
     }
+    
     public static function constantProvider() {
         return array(
             array('a', 'a'),
         );
     }
-
 
     /**
      * @var Scope

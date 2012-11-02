@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Scope | slinpins</title>
+
+	<script type="text/javascript" src="resources/combined.js?1145318285"></script>
+	<script type="text/javascript" src="elementlist.js?2306366942"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="package-Slinpins.html">Slinpins<span></span></a>
+						<ul>
+				<li><a href="package-Slinpins.Test.html">Test</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Scope.html">Scope</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-Slinpins.html" title="Summary of Slinpins"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="slinpins-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Scope</h1>
+
+
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-Slinpins.html">Slinpins</a><br />
+
+				<b>Copyright:</b>
+				(c) 2012, Terrence Howard<br />
+				<b>Author:</b>
+				Terrence Howard &lt;<a
+href="mailto:chemisus&#64;gmail.com">chemisus&#64;<!---->gmail.com</a>&gt;<br />
+				<b>Version:</b>
+				$Id$<br />
+				<b>Since:</b>
+				0.1<br />
+		<b>Located at</b> <a href="source-class-Scope.html#10-298" title="Go to source code">src/Scope.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="keys" id="_keys">
+
+		<td class="attributes"><code>
+			 public 
+			string[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_keys">#</a>
+		<code><a href="source-class-Scope.html#23-59" title="Go to source code">keys</a>( <span><code><a href="class-ReflectionParameter.html">ReflectionParameter</a>[]</code> <var>$params</var></span>, <span>string[] <var>$annotations</var> = <span class="php-keyword1">array</span>()</span>, <span>string[] <var>$injections</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Returns an array containing the keys that should be used to inject into a
+method.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns an array containing the keys that should be used to inject into a
+method.</p>
+
+<p>The keys to be used can be supplied from the following sources, and will be
+set in the following order: 1. parameters 2. annotations 3. injections</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$params</var></dt>
+					<dd><code><code><a href="class-ReflectionParameter.html">ReflectionParameter</a>[]</code></code><br>$params</dd>
+					<dt><var>$annotations</var></dt>
+					<dd><code>string[]</code><br>$annotations</dd>
+					<dt><var>$injections</var></dt>
+					<dd><code>string[]</code><br>$injections</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string[]</code><br>The keys that will be used to be injected into a method.<br />
+				</div>
+
+
+				<h4>Example</h4>
+				<div class="list">
+						Scope.php A basic example.<br />
+				</div>
+				<h4>Test</h4>
+				<div class="list">
+						ScopeTest::testKeys<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetch" id="_fetch">
+
+		<td class="attributes"><code>
+			 public 
+			null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetch">#</a>
+		<code><a href="source-class-Scope.html#61-72" title="Go to source code">fetch</a>( <span>type <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>type</code><br>$key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>null</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="values" id="_values">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_values">#</a>
+		<code><a href="source-class-Scope.html#74-103" title="Go to source code">values</a>( <span>type <var>$keys</var></span>, <span>type <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>type <var>$locals</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keys</var></dt>
+					<dd><code>type</code><br>$keys</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>type</code><br>$params</dd>
+					<dt><var>$locals</var></dt>
+					<dd><code>type</code><br>$locals</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="inject" id="_inject">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_inject">#</a>
+		<code><a href="source-class-Scope.html#105-156" title="Go to source code">inject</a>( <span>callable <var>$value</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>callable</code><br>$value</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="instance" id="_instance">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_instance">#</a>
+		<code><a href="source-class-Scope.html#158-189" title="Go to source code">instance</a>( <span>type <var>$value</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>type</code><br>$value</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="provider" id="_provider">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_provider">#</a>
+		<code><a href="source-class-Scope.html#191-207" title="Go to source code">provider</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>type</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>type</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="constant" id="_constant">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_constant">#</a>
+		<code><a href="source-class-Scope.html#209-221" title="Go to source code">constant</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>type</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>type</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="variable" id="_variable">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_variable">#</a>
+		<code><a href="source-class-Scope.html#223-240" title="Go to source code">variable</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span>, <span>type <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>type</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>type</code><br>$value</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>type</code><br>$args</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="method" id="_method">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_method">#</a>
+		<code><a href="source-class-Scope.html#242-259" title="Go to source code">method</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span>, <span>type <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>type</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>type</code><br>$value</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>type</code><br>$args</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="factory" id="_factory">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_factory">#</a>
+		<code><a href="source-class-Scope.html#261-278" title="Go to source code">factory</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span>, <span>type <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>type</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>type</code><br>$value</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>type</code><br>$args</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="service" id="_service">
+
+		<td class="attributes"><code>
+			 public 
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_service">#</a>
+		<code><a href="source-class-Scope.html#280-297" title="Go to source code">service</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span>, <span>type <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>type</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>type</code><br>$value</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>type</code><br>$args</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="providers" id="$providers">
+		<td class="attributes"><code>
+			private  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Scope.html#17-21" title="Go to source code"><var>$providers</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$providers" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		slinpins API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
