@@ -1,3 +1,3 @@
 
 var ApiGen = ApiGen || {};
-ApiGen.elements = [["c","MockTest"],["c","ReflectionParameter"],["c","Reflector"],["c","Scope"],["c","ScopeTest"]];
+ApiGen.elements = [["c","Closure"],["c","MockTest"],["c","ReflectionFunction"],["c","ReflectionFunctionAbstract"],["c","ReflectionMethod"],["c","Reflector"],["c","Scope"],["c","ScopeTest"]];

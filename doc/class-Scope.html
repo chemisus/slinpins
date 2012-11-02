@@ -7,7 +7,7 @@
 	<title>Class Scope | slinpins</title>
 
 	<script type="text/javascript" src="resources/combined.js?1145318285"></script>
-	<script type="text/javascript" src="elementlist.js?2306366942"></script>
+	<script type="text/javascript" src="elementlist.js?2018968845"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -116,7 +116,7 @@ href="mailto:chemisus&#64;gmail.com">chemisus&#64;<!---->gmail.com</a>&gt;<br />
 				$Id$<br />
 				<b>Since:</b>
 				0.1<br />
-		<b>Located at</b> <a href="source-class-Scope.html#10-298" title="Go to source code">src/Scope.php</a><br />
+		<b>Located at</b> <a href="source-class-Scope.html#29-444" title="Go to source code">src/Scope.php</a><br />
 	</div>
 
 
@@ -134,7 +134,7 @@ href="mailto:chemisus&#64;gmail.com">chemisus&#64;<!---->gmail.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_keys">#</a>
-		<code><a href="source-class-Scope.html#23-59" title="Go to source code">keys</a>( <span><code><a href="class-ReflectionParameter.html">ReflectionParameter</a>[]</code> <var>$params</var></span>, <span>string[] <var>$annotations</var> = <span class="php-keyword1">array</span>()</span>, <span>string[] <var>$injections</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Scope.html#47-77" title="Go to source code">keys</a>( <span>array <var>$array1</var></span>, <span>array <var>$array2</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -148,19 +148,14 @@ method.</p>
 <p>Returns an array containing the keys that should be used to inject into a
 method.</p>
 
-<p>The keys to be used can be supplied from the following sources, and will be
-set in the following order: 1. parameters 2. annotations 3. injections</p>
-
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$params</var></dt>
-					<dd><code><code><a href="class-ReflectionParameter.html">ReflectionParameter</a>[]</code></code><br>$params</dd>
-					<dt><var>$annotations</var></dt>
-					<dd><code>string[]</code><br>$annotations</dd>
-					<dt><var>$injections</var></dt>
-					<dd><code>string[]</code><br>$injections</dd>
+					<dt><var>$array1</var></dt>
+					<dd><code>string[]</code><br>$array1</dd>
+					<dt><var>$array2</var></dt>
+					<dd><code>string[]</code><br>$array2</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -169,14 +164,218 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 				</div>
 
 
-				<h4>Example</h4>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reflectFunction" id="_reflectFunction">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-ReflectionFunction.html">ReflectionFunction</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reflectFunction">#</a>
+		<code><a href="source-class-Scope.html#79-87" title="Go to source code">reflectFunction</a>( <span>callable <var>$function</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the reflection object for a function.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the reflection object for a function.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$function</var></dt>
+					<dd><code>callable</code><br>$function</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
 				<div class="list">
-						Scope.php A basic example.<br />
+					<code><code><a href="class-ReflectionFunction.html">ReflectionFunction</a></code></code><br />
 				</div>
-				<h4>Test</h4>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reflectMethod" id="_reflectMethod">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-ReflectionMethod.html">ReflectionMethod</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reflectMethod">#</a>
+		<code><a href="source-class-Scope.html#89-98" title="Go to source code">reflectMethod</a>( <span>object|string <var>$class</var></span>, <span>string <var>$method</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the reflection object for a method.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the reflection object for a method.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$class</var></dt>
+					<dd><code>object|string</code><br>$class</dd>
+					<dt><var>$method</var></dt>
+					<dd><code>string</code><br>$method</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
 				<div class="list">
-						ScopeTest::testKeys<br />
+					<code><code><a href="class-ReflectionMethod.html">ReflectionMethod</a></code></code><br />
 				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reflectConstructor" id="_reflectConstructor">
+
+		<td class="attributes"><code>
+			 public 
+			string[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reflectConstructor">#</a>
+		<code><a href="source-class-Scope.html#100-110" title="Go to source code">reflectConstructor</a>( <span>object|string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the reflection object for a constructor.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the reflection object for a constructor.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>object|string</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string[]</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parameters" id="_parameters">
+
+		<td class="attributes"><code>
+			 public 
+			string[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parameters">#</a>
+		<code><a href="source-class-Scope.html#112-126" title="Go to source code">parameters</a>( <span><code><a href="class-ReflectionMethod.html">ReflectionMethod</a>[]</code> <var>$parameters</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the names of each parameter in the array provided.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the names of each parameter in the array provided.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$parameters</var></dt>
+					<dd><code><code><a href="class-ReflectionMethod.html">ReflectionMethod</a>[]</code></code><br>$parameters</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string[]</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="annotations" id="_annotations">
+
+		<td class="attributes"><code>
+			 public 
+			string[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_annotations">#</a>
+		<code><a href="source-class-Scope.html#128-155" title="Go to source code">annotations</a>( <span>string <var>$annotation</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parses out the injection info in an annotation docblock.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parses out the injection info in an annotation docblock.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$annotation</var></dt>
+					<dd><code>string</code><br>$annotation</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string[]</code><br />
+				</div>
+
+
 
 
 		</div>
@@ -186,32 +385,36 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			null
+			mixed
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fetch">#</a>
-		<code><a href="source-class-Scope.html#61-72" title="Go to source code">fetch</a>( <span>type <var>$key</var></span> )</code>
+		<code><a href="source-class-Scope.html#157-169" title="Go to source code">fetch</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Returns the value of a provider.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns the value of a provider.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>type</code><br>$key</dd>
+					<dd><code>string</code><br>$key</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>null</code><br />
+					<code>mixed</code><br />
 				</div>
 
 
@@ -224,36 +427,42 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			mixed[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_values">#</a>
-		<code><a href="source-class-Scope.html#74-103" title="Go to source code">values</a>( <span>type <var>$keys</var></span>, <span>type <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>type <var>$locals</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Scope.html#171-218" title="Go to source code">values</a>( <span>string[] <var>$keys</var></span>, <span>mixed[] <var>$values1</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed[] <var>$values2</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Returns an array containing the values from the providers specified by the
+keys array.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns an array containing the values from the providers specified by the
+keys array.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$keys</var></dt>
-					<dd><code>type</code><br>$keys</dd>
-					<dt><var>$params</var></dt>
-					<dd><code>type</code><br>$params</dd>
-					<dt><var>$locals</var></dt>
-					<dd><code>type</code><br>$locals</dd>
+					<dd><code>string[]</code><br>$keys</dd>
+					<dt><var>$values1</var></dt>
+					<dd><code>mixed[]</code><br>$values1</dd>
+					<dt><var>$values2</var></dt>
+					<dd><code>mixed[]</code><br>$values2</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>type</code><br />
+					<code>mixed[]</code><br />
 				</div>
 
 
@@ -266,21 +475,27 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			<code><a href="class-Closure.html">Closure</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_inject">#</a>
-		<code><a href="source-class-Scope.html#105-156" title="Go to source code">inject</a>( <span>callable <var>$value</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Scope.html#220-280" title="Go to source code">inject</a>( <span>callable <var>$value</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$injections</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Returns a Closure object that when called injects the parameters into the
+method provided.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns a Closure object that when called injects the parameters into the
+method provided.</p>
+
 
 
 				<h4>Parameters</h4>
@@ -288,12 +503,14 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 					<dt><var>$value</var></dt>
 					<dd><code>callable</code><br>$value</dd>
 					<dt><var>$params</var></dt>
-					<dd><code>array</code><br>$params</dd>
+					<dd><code>mixed[]</code><br>$params</dd>
+					<dt><var>$injections</var></dt>
+					<dd><code>string[]</code><br>$injections</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>type</code><br />
+					<code><code><a href="class-Closure.html">Closure</a></code></code><br />
 				</div>
 
 
@@ -306,34 +523,42 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			<code><a href="class-Closure.html">Closure</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_instance">#</a>
-		<code><a href="source-class-Scope.html#158-189" title="Go to source code">instance</a>( <span>type <var>$value</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Scope.html#282-331" title="Go to source code">instance</a>( <span>string <var>$value</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$injections</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Returns a Closure object that when called injects the parameters into the
+constructor of the class provided.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns a Closure object that when called injects the parameters into the
+constructor of the class provided.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
-					<dd><code>type</code><br>$value</dd>
+					<dd><code>string</code><br>$value</dd>
 					<dt><var>$params</var></dt>
-					<dd><code>array</code><br>$params</dd>
+					<dd><code>mixed[]</code><br>$params</dd>
+					<dt><var>$injections</var></dt>
+					<dd><code>string[]</code><br>$injections</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>type</code><br />
+					<code><code><a href="class-Closure.html">Closure</a></code></code><br />
 				</div>
 
 
@@ -346,35 +571,35 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_provider">#</a>
-		<code><a href="source-class-Scope.html#191-207" title="Go to source code">provider</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span> )</code>
+		<code><a href="source-class-Scope.html#333-349" title="Go to source code">provider</a>( <span>string <var>$key</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Stores a provider.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Stores a provider.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>type</code><br>$key</dd>
+					<dd><code>string</code><br>$key</dd>
 					<dt><var>$value</var></dt>
-					<dd><code>type</code><br>$value</dd>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$value</dd>
 				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>type</code><br />
-				</div>
 
 
 
@@ -386,35 +611,35 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_constant">#</a>
-		<code><a href="source-class-Scope.html#209-221" title="Go to source code">constant</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span> )</code>
+		<code><a href="source-class-Scope.html#351-363" title="Go to source code">constant</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Creates a provider for a constant value.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Creates a provider for a constant value.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>type</code><br>$key</dd>
+					<dd><code>string</code><br>$key</dd>
 					<dt><var>$value</var></dt>
-					<dd><code>type</code><br>$value</dd>
+					<dd><code>mixed</code><br>$value</dd>
 				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>type</code><br />
-				</div>
 
 
 
@@ -426,37 +651,39 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_variable">#</a>
-		<code><a href="source-class-Scope.html#223-240" title="Go to source code">variable</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span>, <span>type <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Scope.html#365-383" title="Go to source code">variable</a>( <span>string <var>$key</var></span>, <span>callable <var>$value</var></span>, <span>mixed[] <var>$args</var> = <span class="php-keyword1">array</span>()</span>, <span>string[] <var>$keys</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Creates a provider for a variable value.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Creates a provider for a variable value.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>type</code><br>$key</dd>
+					<dd><code>string</code><br>$key</dd>
 					<dt><var>$value</var></dt>
-					<dd><code>type</code><br>$value</dd>
+					<dd><code>callable</code><br>$value</dd>
 					<dt><var>$args</var></dt>
-					<dd><code>type</code><br>$args</dd>
+					<dd><code>mixed[]</code><br>$args</dd>
+					<dt><var>$keys</var></dt>
+					<dd><code>string[]</code><br>$keys</dd>
 				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>type</code><br />
-				</div>
 
 
 
@@ -468,37 +695,39 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_method">#</a>
-		<code><a href="source-class-Scope.html#242-259" title="Go to source code">method</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span>, <span>type <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Scope.html#385-403" title="Go to source code">method</a>( <span>string <var>$key</var></span>, <span>callable <var>$value</var></span>, <span>mixed[] <var>$args</var> = <span class="php-keyword1">array</span>()</span>, <span>string[] <var>$keys</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Creates a provider for a method.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Creates a provider for a method.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>type</code><br>$key</dd>
+					<dd><code>string</code><br>$key</dd>
 					<dt><var>$value</var></dt>
-					<dd><code>type</code><br>$value</dd>
+					<dd><code>callable</code><br>$value</dd>
 					<dt><var>$args</var></dt>
-					<dd><code>type</code><br>$args</dd>
+					<dd><code>mixed[]</code><br>$args</dd>
+					<dt><var>$keys</var></dt>
+					<dd><code>string[]</code><br>$keys</dd>
 				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>type</code><br />
-				</div>
 
 
 
@@ -510,37 +739,39 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_factory">#</a>
-		<code><a href="source-class-Scope.html#261-278" title="Go to source code">factory</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span>, <span>type <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Scope.html#405-423" title="Go to source code">factory</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span>, <span>mixed[] <var>$args</var> = <span class="php-keyword1">array</span>()</span>, <span>string[] <var>$keys</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Creates a provider for a factory.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Creates a provider for a factory.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>type</code><br>$key</dd>
+					<dd><code>string</code><br>$key</dd>
 					<dt><var>$value</var></dt>
-					<dd><code>type</code><br>$value</dd>
+					<dd><code>string</code><br>$value</dd>
 					<dt><var>$args</var></dt>
-					<dd><code>type</code><br>$args</dd>
+					<dd><code>mixed[]</code><br>$args</dd>
+					<dt><var>$keys</var></dt>
+					<dd><code>string[]</code><br>$keys</dd>
 				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>type</code><br />
-				</div>
 
 
 
@@ -552,37 +783,39 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 		<td class="attributes"><code>
 			 public 
-			type
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_service">#</a>
-		<code><a href="source-class-Scope.html#280-297" title="Go to source code">service</a>( <span>type <var>$key</var></span>, <span>type <var>$value</var></span>, <span>type <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Scope.html#425-443" title="Go to source code">service</a>( <span>string <var>$key</var></span>, <span>callable <var>$value</var></span>, <span>mixed[] <var>$args</var> = <span class="php-keyword1">array</span>()</span>, <span>string[] <var>$keys</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Creates a provider for a service.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Creates a provider for a service.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>type</code><br>$key</dd>
+					<dd><code>string</code><br>$key</dd>
 					<dt><var>$value</var></dt>
-					<dd><code>type</code><br>$value</dd>
+					<dd><code>callable</code><br>$value</dd>
 					<dt><var>$args</var></dt>
-					<dd><code>type</code><br>$args</dd>
+					<dd><code>mixed[]</code><br>$args</dd>
+					<dt><var>$keys</var></dt>
+					<dd><code>string[]</code><br>$keys</dd>
 				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>type</code><br />
-				</div>
 
 
 
@@ -599,6 +832,33 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 
 
 
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="ANNOTATION_PATTERN" id="ANNOTATION_PATTERN">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Scope.html#36-39" title="Go to source code"><b>ANNOTATION_PATTERN</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'/^\s*\*\s*(\@inject)\s+(\S+)(?:\s+((?:\d+(?!\S))|(?:\$\S+)))?/'</span></code></td>
+		<td class="description"><div>
+			<a href="#ANNOTATION_PATTERN" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Regular expression used to parse injection annotations.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Regular expression used to parse injection annotations.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
 
 
 
@@ -612,7 +872,7 @@ set in the following order: 1. parameters 2. annotations 3. injections</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Scope.html#17-21" title="Go to source code"><var>$providers</var></a>
+				<a href="source-class-Scope.html#41-45" title="Go to source code"><var>$providers</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
