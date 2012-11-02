@@ -23,13 +23,12 @@
  * @author      Terrence Howard <chemisus@gmail.com>
  * @package     Slinpins
  * @copyright   (c) 2012, Terrence Howard
- * @version     $Id$
  */
 
 /**
+ * A dependency injection container.
  *
  * @author      Terrence Howard <chemisus@gmail.com>
- * @version     $Id$
  * @since       0.1
  */
 class Scope {
