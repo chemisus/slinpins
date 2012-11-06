@@ -7,7 +7,7 @@
  * @copyright (c) 2012, Terrence Howard
  */
 
-require_once('../src/Scope.php');
+require_once('../src/'.\str_replace('Test', '', \basename(__FILE__)));
 
 class MockTest {
     public function __construct($a, $b) {
