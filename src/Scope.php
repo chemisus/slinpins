@@ -430,13 +430,17 @@ class Scope {
      * @param   string[]  $keys
      */
     public function service($key, $value, $args=array(), $keys=array()) {
-        $this->provider($key, function ($scope) use ($value, $args, $keys) {
+        $scope = $this;
+        
+        $this->provider($key, function () use ($scope, $value, $args, $keys) {
             $callback = $scope->inject($value, $args, $keys);
 
             $service = $callback($scope);
+            
+            $constant = $service();
 
-            return function ($scope) use ($service) {
-                return $service;
+            return function ($scope) use ($constant) {
+                return $constant;
             };
         });
     }
