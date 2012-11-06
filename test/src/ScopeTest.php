@@ -68,7 +68,7 @@ class ScopeTest extends PHPUnit_Framework_TestCase {
             array('sprintf', array(), array('k%s', 'l'), 'kl'),
         );
     }
-    
+
     public static function instanceProvider() {
         return array(
             array('MockTest', array('a', 'b'), array(), array('a'=>'a', 'b'=>'b')),
@@ -79,25 +79,25 @@ class ScopeTest extends PHPUnit_Framework_TestCase {
             array('MockTest', array('a', 'b'), array(1=>'d'), array('a'=>'a', 'b'=>'d')),
         );
     }
-    
+
     public static function methodProvider() {
         return array(
             array('a', function () {return 'a';}, array(), array(), 'a')
         );
     }
-    
+
     public static function variableProvider() {
         return array(
             array('a', function () {return 'a';}, array(), 'a')
         );
     }
-    
+
     public static function serviceProvider() {
         return array(
             array('a', function () {return 'a';}, array(), 'a')
         );
     }
-    
+
     public static function constantProvider() {
         return array(
             array('a', 'a'),
@@ -125,15 +125,29 @@ class ScopeTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    public function test() {
+        $this->object->service('test', function ($instance) {
+            $factory = $instance('MockTest');
+            
+            $instance = $factory();
+            
+            return $instance();
+        });
+        
+        $this->object->constant('a', 'a');
+        
+        var_dump($this->object->fetch('test'));
+    }
+
     /**
      * @covers Scope::inject
      * @dataProvider keysProvider
      */
     public function testKeys($method, $annotations, $injects, $expect) {
         $reflection = $this->object->reflectFunction($method);
-        
+
         $parameters = $this->object->parameters($reflection->getParameters());
-        
+
         $result = $this->object->keys($parameters, $annotations, $injects);
 
         $this->assertEquals($expect, $result);

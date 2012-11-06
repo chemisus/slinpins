@@ -43,6 +43,12 @@ class Scope {
      */
     private $providers = array();
 
+    public function __construct() {
+        $this->constant('instance', array($this, 'instance'));
+        
+        $this->constant('inject', array($this, 'inject'));
+    }
+    
     /**
      * Returns an array containing the keys that should be used to inject into
      * a method.
@@ -251,21 +257,23 @@ class Scope {
             );
 
             if (is_array($value) && is_string($value[0])) {
-                $callback = function ($object, $locals) use ($scope, $method, $keys, $params) {
+                $callback = function ($object, $locals=array()) use ($scope, $method, $keys, $params) {
                     $args = $scope->values($keys, $params, $locals);
 
                     return $method->invokeArgs($object, $args);
                 };
             }
             else if (is_array($value)) {
-                $callback = function ($locals) use ($scope, $method, $keys, $params) {
+                $callback = function ($locals=array()) use ($scope, $value, $method, $keys, $params) {
                     $args = $scope->values($keys, $params, $locals);
 
+                    print_r($args);
+                    
                     return $method->invokeArgs($value[0], $args);
                 };
             }
             else {
-                $callback = function ($locals) use ($scope, $method, $keys, $params) {
+                $callback = function ($locals=array()) use ($scope, $method, $keys, $params) {
                     $args = $scope->values($keys, $params, $locals);
 
                     return $method->invokeArgs($args);
@@ -294,7 +302,7 @@ class Scope {
 
         $scope = $this;
 
-        return function ($scope) use ($value, $params, $injections) {
+        return function () use ($scope, $value, $params, $injections) {
             static $method = null;
 
             static $keys = null;
