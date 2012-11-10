@@ -29,10 +29,6 @@
  * 
  * @author      Terrence Howard <chemisus@gmail.com>
  */
-interface Scope extends \ArrayAccess {
-    function provider($key, \Provider $provider);
-
-    function invoke($value, $values=array(), $keys=array());
-
-    function construct($value, $values=array(), $keys=array());
+interface Provider {
+    function get(\Scope $scope);
 }

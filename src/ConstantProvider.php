@@ -29,10 +29,14 @@
  * 
  * @author      Terrence Howard <chemisus@gmail.com>
  */
-interface Scope extends \ArrayAccess {
-    function provider($key, \Provider $provider);
+class ConstantProvider implements Provider {
+    private $value;
 
-    function invoke($value, $values=array(), $keys=array());
+    public function __construct($value) {
+        $this->value = $value;
+    }
 
-    function construct($value, $values=array(), $keys=array());
+    public function get(\Scope $scope) {
+        return $this->value;
+    }
 }

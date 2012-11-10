@@ -29,10 +29,26 @@
  * 
  * @author      Terrence Howard <chemisus@gmail.com>
  */
-interface Scope extends \ArrayAccess {
-    function provider($key, \Provider $provider);
+class MethodProvider implements Provider {
+    private $value;
 
-    function invoke($value, $values=array(), $keys=array());
+    private $values;
 
-    function construct($value, $values=array(), $keys=array());
+    private $keys;
+
+    public function __construct($value, $values=array(), $keys=array()) {
+        $this->value = $value;
+
+        $this->values = $values;
+
+        $this->keys = $keys;
+    }
+
+    public function get(\Scope $scope) {
+        $value = $this->value;
+
+        return function ($values=array(), $keys=array()) use ($scope, $value) {
+            return $scope->invoke($value, $values, $keys);
+        };
+    }
 }
