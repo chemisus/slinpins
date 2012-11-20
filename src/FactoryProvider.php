@@ -29,5 +29,25 @@
  * 
  * @author      Terrence Howard <chemisus@gmail.com>
  */
-interface Scope extends \ArrayAccess {
+class FactoryProvider implements Provider {
+    private $value;
+
+    private $values;
+
+    private $keys;
+    
+    public function __construct($value, $values=array(), $keys=array()) {
+        $this->value = $value;
+
+        $this->values = $values;
+
+        $this->keys = \array_fill_keys($keys, null);
+    }
+
+    public function __invoke($values=array()) {
+        return \call_user_func_array(
+            $this->value,
+            \array_merge($this->keys, $values)
+        );
+    }
 }

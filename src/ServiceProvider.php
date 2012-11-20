@@ -29,5 +29,5 @@
  * 
  * @author      Terrence Howard <chemisus@gmail.com>
  */
-interface Scope extends \ArrayAccess {
+class ServiceProvider implements Provider {
 }
