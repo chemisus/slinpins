@@ -35,20 +35,19 @@ class FactoryProvider implements Provider {
     private $values;
 
     private $keys;
-
+    
     public function __construct($value, $values=array(), $keys=array()) {
         $this->value = $value;
 
         $this->values = $values;
 
-        $this->keys = $keys;
+        $this->keys = \array_fill_keys($keys, null);
     }
 
-    public function get(\Scope $scope) {
-        $value = $this->value;
-
-        return function () use ($scope, $value) {
-            return $scope->construct($value, $this->values, $this->keys);
-        };
+    public function __invoke($values=array()) {
+        return \call_user_func_array(
+            $this->value,
+            \array_merge($this->keys, $values)
+        );
     }
 }

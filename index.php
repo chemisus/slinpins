@@ -8,12 +8,13 @@ require_once('src/FactoryProvider.php');
 require_once('src/ServiceProvider.php');
 require_once('src/Slinpin.php');
 
-$scope = new \Slinpins();
+$method = new \MethodProvider(function ($a, $b) {
+    return $a.'+'.$b;
+}, array(), array('a', 'b'));
 
-$scope->provider('a', new \ConstantProvider('A'));
+echo $method(array(
+    'a' => 'hah',
+    'b' => 'blah',
+));
 
-$scope->provider('b', new \MethodProvider(function ($a) {
-    return $a;
-}));
-
-print_r($scope->b('B'));
+print_r($method->values());

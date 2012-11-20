@@ -30,13 +30,4 @@
  * @author      Terrence Howard <chemisus@gmail.com>
  */
 class ConstantProvider implements Provider {
-    private $value;
-
-    public function __construct($value) {
-        $this->value = $value;
-    }
-
-    public function get(\Scope $scope) {
-        return $this->value;
-    }
 }

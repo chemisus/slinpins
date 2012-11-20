@@ -30,21 +30,4 @@
  * @author      Terrence Howard <chemisus@gmail.com>
  */
 class VariableProvider implements Provider {
-    private $value;
-
-    private $values;
-
-    private $keys;
-
-    public function __construct($value, $values=array(), $keys=array()) {
-        $this->value = $value;
-
-        $this->values = $values;
-
-        $this->keys = $keys;
-    }
-
-    public function get(\Scope $scope) {
-        return $scope->invoke($this->value, $this->values, $this->keys);
-    }
 }

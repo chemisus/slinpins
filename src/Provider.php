@@ -30,5 +30,4 @@
  * @author      Terrence Howard <chemisus@gmail.com>
  */
 interface Provider {
-    function get(\Scope $scope);
 }
